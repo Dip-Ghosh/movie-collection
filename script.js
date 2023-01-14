@@ -1,55 +1,24 @@
-const APIURL = "https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=04c35731a5ee918f014970082a0088b1&page=1";
-const IMGPATH = "https://image.tmdb.org/t/p/w1280";
-const SEARCHAPI = "https://api.themoviedb.org/3/search/movie?&api_key=04c35731a5ee918f014970082a0088b1&query=";
-
-const main = document.getElementById("main");
-const form = document.getElementById("form");
-const search = document.getElementById("search");
 
 // initially get fav movies
 getMovies(APIURL);
 
-async function getMovies(url) {
-    const resp = await fetch(url);
-    const respData = await resp.json();
+const pagination = (movies) => {
+    const page = movies.page;
+    const totalPages = movies.total_pages;
 
-    console.log(respData);
-
-    showMovies(respData.results);
-}
-
-function showMovies(movies) {
-    // clear main
-    main.innerHTML = "";
-
-    const mealElement = document.createElement("div");
-
-    mealElement.innerHTML =
-        ` `;
+    const pagination = document.getElementById('pagination');
 
 
-    movies.forEach((movie) => {
-        const { poster_path, title, vote_average, overview } = movie;
 
-        const movieEl = document.createElement("div");
-        movieEl.classList.add("movie");
 
-        movieEl.innerHTML = `<div class="card mb-12 rounded-3 shadow-sm ">
-                                <div>
-                                      <img class="image-responsive" src="${IMGPATH + poster_path}" alt="${title}" class="card-img-top">
-                                </div>
-                            <div class="card-body">
-                                <h4 class="card-title pricing-card-title">${ title }</h4>
-                                 <span class="${getClassByRate(vote_average)}">${vote_average}</span>
-                                 <div class="overview">
-                                    <h3>Overview:</h3>  ${overview}
-                                 </div>
-                            </div>
-                        </div>
-                 `;
+    for( let i =1; i < totalPages; i++) {
+        const ulElement = document.createElement('ul');
+        ulElement.classList.add('pagination');
+        ulElement.classList.add('justify-content-center');
+        ulElement.innerHTML = `<li class="page-item"><a class="page-link" href="#"> ${ i } </a></li>`;
+        pagination.appendChild(ulElement);
+    }
 
-        main.appendChild(movieEl);
-    });
 }
 
 // <div className="movie-info">
@@ -62,15 +31,7 @@ function showMovies(movies) {
 //     <h3>Overview:</h3>
 //     ${overview}
 // </div>
-function getClassByRate(vote) {
-    if (vote >= 8) {
-        return "green";
-    } else if (vote >= 5) {
-        return "orange";
-    } else {
-        return "red";
-    }
-}
+
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
