@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://dip-meal-app.netlify.app/" target="_blank">
+<a href="https://dip-movie.netlify.app/" target="_blank">
 <img src="./img/img.png" width="400" alt="Movie app Logo"></a></p>
 
 
@@ -11,7 +11,7 @@ Simple Movie app by using themoviedb api collection
 ## Visit Link
 
 We would like to extend our thanks to the following sponsors for funding development.
-If you are interested in becoming a sponsor, please visit the https://dip-meal-app.netlify.app/
+If you are interested in becoming a sponsor, please visit the https://dip-movie.netlify.app/
 
 
 
