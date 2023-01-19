@@ -13,27 +13,24 @@ const getMovies = async () => {
 const showMovies = (movies) => {
 
     main.innerHTML = "";
-
-    movies.forEach((movie) => {
-
-        const { poster_path, title, vote_average, overview } = movie;
+    movies.map((movie) => {
         const movieEl = document.createElement("div");
         movieEl.classList.add("movie");
 
         movieEl.innerHTML = `<div class="card mb-12 rounded-3 shadow-sm ">
-                                    <img class="image-responsive" src="${IMGPATH + poster_path}" alt="${title}" class="card-img-top">
+                                    <img class="image-responsive" src="${IMGPATH + movie.poster_path}" alt="${movie.title}" class="card-img-top">
                              </div>
                             <div class="overview">
                                       <span class="card-title pricing-card-title">
-                                        <h3>Title : ${ title } </h3>
-                                         <h5>Rating : ${ vote_average }</h5><span class="${getClassByRate(vote_average)}"></span>
+                                        <h3>Title : ${ movie.title } </h3>
+                                         <h5>Rating : ${ movie.vote_average }</h5><span class="${getClassByRate(movie.vote_average)}"></span>
                                       </span>
-                                      <h5 class="mt-1">Overview:</h5>  ${overview}
+                                      <h5 class="mt-1">Overview:</h5>  ${movie.overview}
                              </div>
                              `;
 
         main.appendChild(movieEl);
-    });
+    })
 }
 
 function getClassByRate(vote) {
